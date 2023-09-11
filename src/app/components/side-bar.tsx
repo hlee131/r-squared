@@ -3,6 +3,7 @@
 import { Fragment, useContext, useState } from "react"
 import AuthModal from "./auth-modal";
 import { UserDataContext } from "../providers";
+import Link from "next/link";
 
 
 export default function SideBar() {
@@ -29,7 +30,18 @@ export default function SideBar() {
 
                     {/* filter by arxiv tags */}
                     <h1 className="text-2xl">Arxiv Tags</h1>
-                    {userData?.following_tags.length ? '' :
+                    {userData?.following_tags.length ?
+                        <div className="w-full flex flex-row flex-wrap m-1 justify-center">
+                            {userData?.following_tags.map((tag) =>
+                                <Link
+                                    key={tag}
+                                    className="round-border mr-1 p-1 w-fit h-fit"
+                                    onClick={() => setIsOpen(false)}
+                                    href={`/tag/${tag}`}>
+                                    {tag}
+                                </Link>)
+                            }
+                        </div> :
                         <Fragment>
                             <p>You currently aren't following any tags.</p>
                             <p>To follow a tag, click on the tag.</p>

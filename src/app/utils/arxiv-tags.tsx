@@ -1,3 +1,5 @@
+// TODO: move to backend as db?
+
 export const mappings: { [short_name: string]: string } = {
     'cs.CL': 'Computation and Languages',
     'cs.AI': 'Artificial Intelligence',

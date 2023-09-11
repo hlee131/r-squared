@@ -2,9 +2,6 @@
 
 import { useState } from 'react';
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from '../../../types/supabase';
-
 export default function AuthModal({ closeModal }: { closeModal: () => void }) {
     const [currentPage, setCurrentPage] = useState('Login');
 
