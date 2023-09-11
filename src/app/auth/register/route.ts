@@ -13,6 +13,7 @@ export async function POST(request: Request) {
     const username = String(formData.get('username'));
     const supabase = createRouteHandlerClient<Database>({ cookies });
 
+    // TODO: check duplicate username 
     const { error } = await supabase.auth.signUp({
         email,
         password,

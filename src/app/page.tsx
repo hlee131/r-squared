@@ -1,13 +1,9 @@
-import SideBar from './side-bar';
-import ArticleList from './article-list';
-import Message from './message';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import ArticleList from './components/article-list';
+import { cookies } from 'next/headers';
 
 export default async function Home() {
-    return (
-        <div className="flex flex-row relative">
-            <SideBar></SideBar>
-            <ArticleList></ArticleList>
-            <Message></Message>
-        </div>
-    )
+    const supabase = createServerComponentClient({ cookies });
+    const { data } = await supabase.from('papers').select('*');
+    return <ArticleList articles={data || []}></ArticleList >;
 }

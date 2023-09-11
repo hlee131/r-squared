@@ -36,23 +36,38 @@ export interface Database {
       profiles: {
         Row: {
           avatar_url: string | null
+          currently_reading: string | null
+          following_tags: string[]
+          following_users: string[]
           id: string
           last_online: string | null
           username: string | null
         }
         Insert: {
           avatar_url?: string | null
+          currently_reading?: string | null
+          following_tags?: string[]
+          following_users?: string[]
           id: string
           last_online?: string | null
           username?: string | null
         }
         Update: {
           avatar_url?: string | null
+          currently_reading?: string | null
+          following_tags?: string[]
+          following_users?: string[]
           id?: string
           last_online?: string | null
           username?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "fk_paper_id"
+            columns: ["currently_reading"]
+            referencedRelation: "papers"
+            referencedColumns: ["arxiv_id"]
+          },
           {
             foreignKeyName: "profiles_id_fkey"
             columns: ["id"]
@@ -66,7 +81,34 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      follow_tag: {
+        Args: {
+          tag_name: string
+        }
+        Returns: {
+          avatar_url: string | null
+          currently_reading: string | null
+          following_tags: string[]
+          following_users: string[]
+          id: string
+          last_online: string | null
+          username: string | null
+        }
+      }
+      unfollow_tag: {
+        Args: {
+          tag_name: string
+        }
+        Returns: {
+          avatar_url: string | null
+          currently_reading: string | null
+          following_tags: string[]
+          following_users: string[]
+          id: string
+          last_online: string | null
+          username: string | null
+        }
+      }
     }
     Enums: {
       [_ in never]: never
