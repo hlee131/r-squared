@@ -10,4 +10,27 @@
     .selected {
         @apply bg-slate-900 text-white;
     }
+
+
+}
+
+@layer components {
+
+    .wysiwyg-editor,
+    .wysiwyg-toolbar {
+        @apply round-border;
+    }
+
+    .wysiwyg-editor {
+        @apply h-40 p-1 !important;
+
+        .public-DraftStyleDefault-block {
+            @apply m-1;
+        }
+    }
+
+    .wysiwyg-wrapper {
+        @apply m-3;
+    }
+
 }
