@@ -11,25 +11,42 @@
         @apply bg-slate-900 text-white;
     }
 
+    /* TODO: fix width of indented */
+    .indent {
+        @apply pl-10;
+    }
 
 }
 
 @layer components {
 
-    .wysiwyg-editor,
-    .wysiwyg-toolbar {
+    div[class^="wysiwyg-editor"],
+    div[class^="wysiwyg-toolbar"] {
         @apply round-border;
-    }
-
-    .wysiwyg-editor {
-        @apply h-40 p-1 !important;
 
         .public-DraftStyleDefault-block {
             @apply m-1;
         }
     }
 
-    .wysiwyg-wrapper {
+    .wysiwyg-editor-primary {
+        @apply h-40 p-1 !important;
+    }
+
+    .wysiwyg-editor-reply {
+        @apply h-fit p-1 !important;
+    }
+
+
+    .reply-box {
+        @apply round-border w-3/4;
+
+        button {
+            @apply mb-3;
+        }
+    }
+
+    div[class^="wysiwyg-wrapper"] {
         @apply m-3;
     }
 

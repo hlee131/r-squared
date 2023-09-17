@@ -2,12 +2,13 @@
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { EditorState, convertToRaw } from 'draft-js';
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { Database } from '../../../types/supabase';
 
-export default function WYSIWYG() {
+
+export default function WYSIWYG({ mode, closeFn, parent_comment }: { mode: 'primary' | 'reply', closeFn?: () => void, parent_comment?: string }) {
     const [editorState, setEditorState] = useState(
         EditorState.createEmpty()
     )
@@ -20,22 +21,22 @@ export default function WYSIWYG() {
 
     const onClick = async () => {
         const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
-        await supabase.from('comments').insert({ content, article: window.location.href.slice(-10) }).select()
-        console.log(content)
+        await supabase.from('comments').insert({ content, article: window.location.href.slice(-10), parent_comment }).select();
     }
 
-    return <Fragment>
+    return <div className={mode == 'primary' ? '' : 'reply-box'}>
         <Editor
             editorState={editorState}
             onEditorStateChange={onChange}
-            toolbarClassName="wysiwyg-toolbar"
-            wrapperClassName="wysiwyg-wrapper"
-            editorClassName="wysiwyg-editor"
+            toolbarClassName={mode == 'primary' ? 'wysiwyg-toolbar-primary' : 'wysiwyg-toolbar-reply'}
+            wrapperClassName={mode == 'primary' ? 'wysiwyg-wrapper-primary' : 'wysiwyg-wrapper-reply'}
+            editorClassName={mode == 'primary' ? 'wysiwyg-editor-primary' : 'wysiwyg-editor-reply'}
             toolbar={{
-                options: ['inline', 'blockType', 'fontSize',
-                    'fontFamily', 'list', 'textAlign', 'colorPicker', 'link',
-                    'embedded', 'emoji', 'remove', 'history']
+                options: ['inline', 'fontSize', 'fontFamily', 'colorPicker', 'emoji']
             }} />
-        <button onClick={onClick} className="selected round-border p-1 ml-3">Post!</button>
-    </Fragment>
+        <div>
+            <button onClick={onClick} className="selected round-border p-1 ml-3">Post!</button>
+            {closeFn ? <button onClick={closeFn} className="selected round-border p-1 ml-3">Cancel</button> : ''}
+        </div>
+    </div>
 }

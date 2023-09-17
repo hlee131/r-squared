@@ -22,7 +22,7 @@ export default function Breadcrumbs() {
                 params.arxivtag : params.arxivtag[0]);
         } else setTag('');
 
-        setFollowing(userData?.following_tags.includes(tag || '') || false);
+        setFollowing(userData?.following_tags.includes(tag ?? '') ?? false);
 
     }, [params]);
 
@@ -47,7 +47,7 @@ export default function Breadcrumbs() {
     return (
         params.arxivtag ?
             <div className="absolute bottom-4 right-4">
-                <h1 className="text-xl m-1">{mappings[tag || '']} ({tag})</h1>
+                <h1 className="text-xl m-1">{mappings[tag ?? '']} ({tag})</h1>
                 <button onClick={onClick} className={`${following ? 'selected' : ''} text-xl round-border p-1 m-1 w-full`}>
                     {following ? 'Unfollow' : 'Follow'}
                 </button>

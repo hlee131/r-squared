@@ -9,6 +9,52 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      comments: {
+        Row: {
+          article: string
+          author: string
+          content: Json
+          id: string
+          parent_comment: string | null
+          posted_at: string
+        }
+        Insert: {
+          article: string
+          author?: string
+          content: Json
+          id?: string
+          parent_comment?: string | null
+          posted_at?: string
+        }
+        Update: {
+          article?: string
+          author?: string
+          content?: Json
+          id?: string
+          parent_comment?: string | null
+          posted_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_article_fkey"
+            columns: ["article"]
+            referencedRelation: "papers"
+            referencedColumns: ["arxiv_id"]
+          },
+          {
+            foreignKeyName: "comments_author_fkey"
+            columns: ["author"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_parent"
+            columns: ["parent_comment"]
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       papers: {
         Row: {
           arxiv_id: string
@@ -41,7 +87,7 @@ export interface Database {
           following_users: string[]
           id: string
           last_online: string | null
-          username: string | null
+          username: string
         }
         Insert: {
           avatar_url?: string | null
@@ -50,7 +96,7 @@ export interface Database {
           following_users?: string[]
           id: string
           last_online?: string | null
-          username?: string | null
+          username: string
         }
         Update: {
           avatar_url?: string | null
@@ -59,7 +105,7 @@ export interface Database {
           following_users?: string[]
           id?: string
           last_online?: string | null
-          username?: string | null
+          username?: string
         }
         Relationships: [
           {
@@ -92,7 +138,7 @@ export interface Database {
           following_users: string[]
           id: string
           last_online: string | null
-          username: string | null
+          username: string
         }
       }
       unfollow_tag: {
@@ -106,7 +152,7 @@ export interface Database {
           following_users: string[]
           id: string
           last_online: string | null
-          username: string | null
+          username: string
         }
       }
     }

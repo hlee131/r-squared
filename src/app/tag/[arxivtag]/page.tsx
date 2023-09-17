@@ -10,5 +10,5 @@ export default async function Page({ params }: {
     // TODO: 404 redirecter
     const supabase = createServerComponentClient({ cookies });
     const { data } = await supabase.from('papers').select('*').contains('arxiv_tags', [params.arxivtag])
-    return <ArticleList articles={data || []}></ArticleList>
+    return <ArticleList articles={data ?? []}></ArticleList>
 }

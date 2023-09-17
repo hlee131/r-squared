@@ -36,7 +36,7 @@ export default function Providers({ children }: {
         supabase.auth.getUser()
             .then(({ data }) => data.user)
             .then(user => user ? supabase.from('profiles').select('*').eq('id', user.id) : null)
-            .then(res => res?.data?.at(0) || null)
+            .then(res => res?.data?.at(0) ?? null)
             .then(user => setUserData(user));
     }
 
@@ -49,8 +49,8 @@ export default function Providers({ children }: {
 
         if (params.size == 2) {
             let urlMessage = {
-                message: params.get('message') || '',
-                type: MessageType[(params.get('type')?.toUpperCase() || 'MESSAGE') as keyof typeof MessageType]
+                message: params.get('message') ?? '',
+                type: MessageType[(params.get('type')?.toUpperCase() ?? 'MESSAGE') as keyof typeof MessageType]
             };
             setMessages([urlMessage]);
         }

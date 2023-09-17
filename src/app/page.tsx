@@ -5,5 +5,5 @@ import { cookies } from 'next/headers';
 export default async function Home() {
     const supabase = createServerComponentClient({ cookies });
     const { data } = await supabase.from('papers').select('*');
-    return <ArticleList articles={data || []}></ArticleList >;
+    return <ArticleList articles={data ?? []}></ArticleList >;
 }
