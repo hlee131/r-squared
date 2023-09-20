@@ -28,9 +28,10 @@ export default function Message() {
     return (
         <div className="z-10 w-1/5 fixed bottom-0 right-0 m-5">
             {messages.length > 0 ?
-                messages.map((msg) =>
+                messages.map((msg, i) =>
                     <div onClick={() => onClick(msg)}
-                        className={`m-3 cursor-pointer p-3 w-full round-border ${colors[msg.type]}`}>
+                        className={`m-3 cursor-pointer p-3 w-full round-border ${colors[msg.type]}`}
+                        key={i}>
                         <p className='text-lg'>
                             {msg.message}</p>
                         <p className="text-gray-600">(Click to dismiss)</p>

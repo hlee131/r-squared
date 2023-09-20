@@ -34,14 +34,14 @@ export default function Breadcrumbs() {
                 message: 'Please login to follow tags'
             }
             setMessages(prev => [...prev, message]);
+        } else {
+            supabase.rpc(following ? 'unfollow_tag' : 'follow_tag', {
+                tag_name: tag
+            }).then(() => {
+                setFollowing(prev => !prev)
+                updateUserData();
+            });
         }
-
-        supabase.rpc(following ? 'unfollow_tag' : 'follow_tag', {
-            tag_name: tag
-        }).then(() => {
-            setFollowing(prev => !prev)
-            updateUserData();
-        });
     }
 
     return (

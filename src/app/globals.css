@@ -16,6 +16,14 @@
         @apply pl-10;
     }
 
+    .circle {
+        border-radius: 50%;
+    }
+
+    .max-w-half {
+        max-width: 50vw;
+    }
+
 }
 
 @layer components {
@@ -30,7 +38,11 @@
     }
 
     .wysiwyg-editor-primary {
-        @apply h-40 p-1 !important;
+        @apply p-1 h-3/4 !important;
+    }
+
+    .wysiwyg-wrapper-primary {
+        @apply h-5/6;
     }
 
     .wysiwyg-editor-reply {
@@ -39,7 +51,7 @@
 
 
     .reply-box {
-        @apply round-border w-3/4;
+        @apply round-border mr-3;
 
         button {
             @apply mb-3;
@@ -47,7 +59,7 @@
     }
 
     div[class^="wysiwyg-wrapper"] {
-        @apply m-3;
+        @apply mx-3;
     }
 
 }
