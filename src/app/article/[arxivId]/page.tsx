@@ -22,19 +22,19 @@ export default async function Page({ params }: {
         .is('parent_comment', null);
 
 
-    return (<div className="w-9/12 h-full flex flex-row my-1">
+    return (<div className="w-9/12 h-full flex flex-row my-1 fill-remaining overflow-y-clip">
         {/* actual paper */}
         <div className="round-border w-1/2 h-full mr-1">
 
         </div>
 
         {/* comments and tools */}
-        <div className="w-1/2 h-full round-border ml-1">
+        <div className="w-1/2 h-full round-border ml-1 flex flex-col">
             {/* comment editor */}
-            <WYSIWYG mode='primary' className="h-1/6" />
+            <WYSIWYG mode='primary' className="h-1/4" />
 
             {/* comments */}
-            <div className="overflow-y-scroll h-5/6">
+            <div className="overflow-y-scroll h-5/6 fill-remaining overflow-y-auto">
                 {data?.map(comment => <Comment comment={comment} />)}
             </div>
         </div>

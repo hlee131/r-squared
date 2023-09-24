@@ -24,6 +24,10 @@
         max-width: 50vw;
     }
 
+    .fill-remaining {
+        flex: 1 1 auto;
+    }
+
 }
 
 @layer components {

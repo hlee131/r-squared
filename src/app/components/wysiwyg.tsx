@@ -44,7 +44,7 @@ export default function WYSIWYG({ mode, closeFn, parent_comment, className }:
             toolbar={{
                 options: ['inline', 'fontSize', 'colorPicker', 'emoji']
             }} />
-        <div className="h-1/6">
+        <div>
             <button onClick={onClick} className="selected round-border p-1 ml-3">Post!</button>
             {closeFn ? <button onClick={closeFn} className="selected round-border p-1 ml-3">Cancel</button> : ''}
         </div>

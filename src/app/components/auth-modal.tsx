@@ -6,6 +6,7 @@ export default function AuthModal({ closeModal }: { closeModal: () => void }) {
     const [currentPage, setCurrentPage] = useState('Login');
 
     return (
+        // TOOD: if auth error, ask to confirm email
         <div className="relative flex flex-row space-between round-border bg-white w-1/3 p-3" >
 
             {/* form */}
